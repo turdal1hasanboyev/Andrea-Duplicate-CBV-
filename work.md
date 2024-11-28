@@ -1,2 +1,1 @@
 Men admin.py fayli uchun modellar registratsiyasini oddiy usulda yozmoqchiman (admin.site.register())
-Yo'q bugun model to'lliq yozib bo'linadi va ertaga birinchi bo'lib admin register qilinadi class yordamida full register bo'ladi
