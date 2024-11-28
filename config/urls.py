@@ -3,8 +3,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from django.conf.urls import handler404
-from .errors import CustomPageNotFoundView
+from .errors import CustomPageNotFoundPageView
 
 urlpatterns = [
     path('andrea/', admin.site.urls),
@@ -17,7 +16,7 @@ urlpatterns = [
     path('', include('apps.article.urls')),
 ]
 
-handler404 = CustomPageNotFoundView.as_view()
+handler404 = CustomPageNotFoundPageView.as_view()
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

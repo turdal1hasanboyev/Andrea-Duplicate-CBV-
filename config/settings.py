@@ -6,11 +6,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 env.read_env(str(BASE_DIR / '.env'))
 
-SECRET_KEY = env.str("SECRET_KEY", 'DEFAULT_SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+# AUTH_USER_MODEL = 'user.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,11 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'query_counter',
     'ckeditor',
     'ckeditor_uploader',
-
     'apps.common',
     'apps.user',
     'apps.article',
@@ -33,7 +33,7 @@ INSTALLED_APPS = [
 {
     'DQC_SLOWEST_COUNT': 5,
     'DQC_TABULATE_FMT': 'pretty',
-    'DQC_SLOW_THRESHOLD': 1,  # seconds
+    'DQC_SLOW_THRESHOLD': 1,
     'DQC_INDENT_SQL': True,
     'DQC_PYGMENTS_STYLE': 'tango',
     'DQC_PRINT_ALL_QUERIES': False,
@@ -53,13 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'query_counter.middleware.DjangoQueryCounterMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
-
-# AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
@@ -72,8 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                'config.global_context.global_context',
+                'config.global_context.custom_global_context',
             ],
         },
     },
@@ -143,7 +139,6 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',
-        # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -169,32 +164,22 @@ CKEDITOR_CONFIGS = {
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
             {'name': 'about', 'items': ['About']},
-            '/',  # put this to force next toolbar on new line
+            '/',
             {'name': 'yourcustomtools', 'items': [
-                # put the name of your editor.ui.addButton here
                 'Preview',
                 'Maximize',
 
             ]},
         ],
-        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        # 'height': 291,
-        # 'width': '100%',
-        # 'filebrowserWindowHeight': 725,
-        # 'filebrowserWindowWidth': 940,
-        # 'toolbarCanCollapse': True,
-        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'toolbar': 'YourCustomToolbarConfig',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
-            # your extra plugins here
+            'uploadimage',
             'div',
             'autolink',
             'autoembed',
             'embedsemantic',
             'autogrow',
-            # 'devtools',
             'widget',
             'lineutils',
             'clipboard',

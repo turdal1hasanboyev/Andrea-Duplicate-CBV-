@@ -1,3 +1,3 @@
-def global_context(request):
+def custom_global_context(request):
     context = {}
     return context
