@@ -1,1 +1,2 @@
 Men admin.py fayli uchun modellar registratsiyasini oddiy usulda yozmoqchiman (admin.site.register())
+Paginator dan vos kechilmoqda
