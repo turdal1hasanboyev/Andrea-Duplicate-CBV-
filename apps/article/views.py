@@ -25,8 +25,10 @@ class HomePageView(ListView):
 
     def post(self, request, *args, **kwargs):
         sub_email = request.POST.get('sub_email')
-        SubEmail.objects.create(email=sub_email)
-        return redirect('/') # or return redirect('index')
+
+        if sub_email:
+            SubEmail.objects.create(email=sub_email)
+            return redirect('/')
     
 
 class FashionPageView(TemplateView):
@@ -41,8 +43,9 @@ class FashionPageView(TemplateView):
         url = request.build_absolute_uri()
         sub_email = request.POST.get('sub_email')
 
-        SubEmail.objects.create(email=sub_email)
-        return redirect(url)
+        if sub_email:
+            SubEmail.objects.create(email=sub_email)
+            return redirect(url)
     
 
 class TravelPageView(View):
@@ -50,7 +53,7 @@ class TravelPageView(View):
         articles = Article.objects.filter(category__slug__exact='travel-a7bb8ce7-b703-4426-a5d5-a2bf4d30254f').order_by('id')
 
         context = {
-            'articles': articles[:12],
+            'articles': articles[:8],
         }
         return render(request, 'travel.html', context)
     
@@ -58,8 +61,9 @@ class TravelPageView(View):
         url = request.build_absolute_uri()
         sub_email = request.POST.get('sub_email')
         
-        SubEmail.objects.create(email=sub_email)
-        return redirect(url)
+        if sub_email:
+            SubEmail.objects.create(email=sub_email)
+            return redirect(url)
 
 
 class SinglePageView(DetailView):
@@ -69,13 +73,17 @@ class SinglePageView(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs.get('slug')
-        return Article.objects.get(slug__iexact=slug)
+        article = Article.objects.get(slug__iexact=slug)
+        article.views =+ 1
+        article.save()
+        return article
 
     def post(self, request, *args, **kwargs):
         article = self.get_object()
         sub_email = request.POST.get('sub_email')
 
-        SubEmail.objects.create(email=sub_email)
+        if sub_email:
+            SubEmail.objects.create(email=sub_email)
 
         name = request.POST.get('name')
         email = request.POST.get('email')
