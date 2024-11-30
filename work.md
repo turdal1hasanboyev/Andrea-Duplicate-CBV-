@@ -9,3 +9,5 @@ class CustomPageNotFoundView(View):
         return render(request, '404.html', status=404)
 ```
 Aslida errors.py shunday yozilishi kerak edi.
+Loyihaga register, login va logout funksiyasi qo'shildi
+Whitenoise bekor qilindi

@@ -1,0 +1,31 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+<h2 class="text-center mt-4">Login</h2>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <form method="post" class="p-4 rounded shadow-lg bg-light" style="width: 100%; max-width: 400px;">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="Enter a username" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Enter a password" required>
+    </div>
+
+    <div class="form-check mb-3">
+      <label for="checkbox" class="form-check-label">Remember me</label>
+      <input type="checkbox" id="checkbox" class="form-check-input" value="checkbox" checked>
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+
+    <div class="text-center mt-3">
+      <p>Don't have a profile?<a href="{% url 'register' %}" class="text-decoration-none text-primary">Register</a></p>
+    </div>
+  </form>
+</div>

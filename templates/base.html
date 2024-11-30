@@ -45,6 +45,15 @@
                             href="/about/">About</a></li>
                     <li class="{% if request.resolver_match.url_name == 'contact' %}colorlib-active{% endif %}"><a
                             href="/contact/">Contact</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li class="{% if request.resolver_match.url_name == 'logout' %}colorlib-active{% endif %}"><a
+                        href="/logout/">Logout</a></li>
+                    {% else %}
+                    <li class="{% if request.resolver_match.url_name == 'register' %}colorlib-active{% endif %}"><a
+                        href="{% url 'register' %}">Register</a></li>
+                    <li class="{% if request.resolver_match.url_name == 'login' %}colorlib-active{% endif %}"><a
+                        href="/login/">Login</a></li>
+                    {% endif %}
                 </ul>
             </nav>
 

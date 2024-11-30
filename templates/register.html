@@ -1,0 +1,51 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+<h2 class="text-center mt-4">Register</h2>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <form method="post" class="p-4 rounded shadow-lg bg-light" style="width: 100%; max-width: 500px;">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Enter your first name"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name</label>
+      <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter your last name"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirm_password" class="form-label">Confirm Password</label>
+      <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+        placeholder="Confirm your password" required>
+    </div>
+    
+    <div class="form-check mb-3">
+      <label for="checkbox" class="form-check-label">I have read and agree to the terms</label>
+      <input type="checkbox" id="checkbox" class="form-check-input" value="checkbox" checked>
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+  </form>
+</div>

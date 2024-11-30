@@ -85,12 +85,16 @@ class SinglePageView(DetailView):
         if sub_email:
             SubEmail.objects.create(email=sub_email)
 
+        if not request.user.is_authenticated:
+            return redirect("login")
+
         name = request.POST.get('name')
         email = request.POST.get('email')
         web_site = request.POST.get('web_site')
         message = request.POST.get('message')
 
-        Comment.objects.create(
+        if name and email and web_site and message:
+            Comment.objects.create(
             article_id=article.id,
             user_id=request.user.id,
             name=name,
